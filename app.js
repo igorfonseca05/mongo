@@ -1,13 +1,16 @@
 require('dotenv').config()
 const express = require('express')
 const cors = require('cors')
-const { MongoClient, ChangeStream, ObjectId } = require('mongodb')
+const mongoose = require('mongoose')
+
+const UserModel = require('./src/model/userModel')
 
 const app = express()
 
 // Conectando a base de dados
-const client = new MongoClient(process.env.DB_URL)
-const db = client.db('lab')
+mongoose.connect(process.env.DB_URL)
+    .then(() => console.log('Database connnected'))
+    .catch((error) => console.log(error.message))
 
 
 
@@ -27,12 +30,14 @@ app.get('/', (req, res) => {
 
 app.post('/data', async (req, res) => {
     try {
+        const newUser = new UserModel(req.body)
 
-        const { name, email } = req.body
-
-        const doc = { _id: new ObjectId(), name, email }
-        const data = await db.collection('user').insertOne(doc)
-        res.status(200).json({ message: 'Usuário cadastrado à base de dados', userData: doc })
+        try {
+            await newUser.save()
+            res.status(200).json({ message: 'User storaged to the database' })
+        } catch (error) {
+            res.status(404).json({ message: error.message })
+        }
 
     } catch (error) {
         console.log(error)
@@ -43,8 +48,13 @@ app.post('/data', async (req, res) => {
 /**Rota para obter dados da base de dados */
 app.get('/data', async (req, res) => {
     try {
-        const data = await db.collection('pokemon').find().toArray()
-        res.status(200).json({ data })
+        const user = await UserModel.find()
+
+        if (!user) {
+            throw new Error('user not found')
+        }
+
+        res.status(200).json({ user })
 
     } catch (error) {
         console.log(error)
@@ -66,10 +76,4 @@ app.get('/data/:id', async (req, res) => {
     }
 })
 
-
-client.connect()
-    .then(() => console.log('Base conectada'))
-    .catch(error => console.log(error))
-
-
-module.exports = { app, client }
+module.exports = { app, mongoose }

@@ -4,9 +4,8 @@ POST http://localhost:5000/data
 Content-Type: application/json
 
 {
-    "name": "Igor",
-    "email": "igorfon@gmail.com"    
+    "name": "Caio",
+    "email": "Caio@gmail.com"    
 }
 
-###
 ###
