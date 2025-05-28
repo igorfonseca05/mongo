@@ -1,17 +1,6 @@
 const mongoose = require('mongoose')
 
 const taskSchema = new mongoose.Schema({
-    title: {
-        type: String,
-        required: true,
-        trim: true,
-        lowercase: true,
-        validate(title) {
-            if (!title || title.length <= 2) {
-                throw new Error('Title description is required and should contain at least 3 characters')
-            }
-        }
-    },
     description: {
         type: String,
         require: true,
@@ -22,9 +11,13 @@ const taskSchema = new mongoose.Schema({
                 throw new Error('Description is required')
             }
         }
+    },
+    isCompleted: {
+        type: Boolean,
+        required: true
     }
 })
 
-const UserModel = mongoose.model('user', taskSchema)
+const TaskModel = mongoose.model('task', taskSchema)
 
-module.exports = UserModel
+module.exports = TaskModel

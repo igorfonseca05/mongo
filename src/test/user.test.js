@@ -12,7 +12,7 @@ beforeEach(async () => {
 /** This test is responsible for add new user to the database */
 test('it should to add a new user', async () => {
     const res = await request(app)
-        .post('/data')
+        .post('/user')
         .send({
             name: 'Carlos',
             email: 'carlos@gmail.com'
@@ -23,7 +23,7 @@ test('it should to add a new user', async () => {
 
 test('it should get the users that have been added to the database', async () => {
     const res = await request(app)
-        .get('/data')
+        .get('/user')
     expect(res.statusCode).toBe(200)
 })
 
