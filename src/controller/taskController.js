@@ -11,3 +11,22 @@ exports.createTask = async (req, res) => {
         res.status(404).json({ message: error.message })
     }
 }
+
+
+exports.getTaskById = async (req, res) => {
+    try {
+
+        const id = req.params.id
+        const doc = await TaskModel.findById(id)
+
+        if (!doc) {
+            throw new Error('Document not found')
+        }
+
+        res.status(200).json({ doc })
+
+    } catch (error) {
+        console.log(error)
+        res.status(404).json({ message: error.message })
+    }
+}

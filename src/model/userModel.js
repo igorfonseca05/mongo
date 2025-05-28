@@ -31,7 +31,7 @@ const userSchema = new mongoose.Schema({
         minLength: 7,
         validate(password) {
             if (!password || password.includes('password')) {
-                throw new Error('Email is invalid')
+                throw new Error('Invalid password')
             }
         }
     }

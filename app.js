@@ -3,7 +3,6 @@ const express = require('express')
 const cors = require('cors')
 const mongoose = require('mongoose')
 
-const UserModel = require('./src/model/userModel')
 
 const app = express()
 

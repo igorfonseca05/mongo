@@ -11,7 +11,7 @@ routes.use('/tasks', task)
 
 
 routes.use('', (req, res) => {
-    res.send({ message: 'Route not found' })
+    res.status(404).send({ message: 'Route not found' })
 })
 
 

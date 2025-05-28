@@ -21,22 +21,19 @@ exports.getUser = async (req, res) => {
 
 exports.getUserById = async (req, res) => {
 
-    const { id } = req.body
+    const _id = req.params.id
 
     try {
-        const user = await UserModel.find()
+        const user = await UserModel.findById(_id)
 
         if (!user) {
             throw new Error('user not found')
         }
-
         res.status(200).json({ user })
 
     } catch (error) {
         console.log(error)
         res.status(404).json({ message: error.message })
-    } finally {
-        // await client.close()
     }
 }
 
