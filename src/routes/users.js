@@ -2,14 +2,19 @@ const express = require('express')
 const route = express.Router()
 
 // Controllers das rota user
-const { createUser, getUser, getUserById } = require('../controller/userController')
+const {
+    createUser,
+    getUsers,
+    getUserById,
+    updateUserData,
+    deleteUserById } = require('../controller/userController')
 
 
-route.get('/', getUser)
-route.get('/:id', getUserById)
 route.post('/', createUser)
-route.patch('/:id', () => { })
-route.delete('/:id', () => { })
+route.get('/', getUsers)
+route.get('/:id', getUserById)
+route.patch('/:id', updateUserData)
+route.delete('/:id', deleteUserById)
 
 
 module.exports = route

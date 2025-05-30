@@ -1,10 +1,9 @@
 ###
-
 GET  http://localhost:5000/tasks/6837980f14472d42069f6d5b
 Content-Type: application/json
 ###
-###
 
+###
 POST http://localhost:5000/tasks
 Content-Type: application/json
 
@@ -12,5 +11,19 @@ Content-Type: application/json
     "description": "Do the dishes",
     "isCompleted": false
 }
+###
 
+###
+PATCH  http://localhost:5000/tasks/6839b1faeb517bf62e6d0f70
+Content-Type: application/json
+
+{
+    "description": "Wash my hands",
+    "isCompleted": false
+}
+###
+
+###
+DELETE   http://localhost:5000/tasks/68379a4270bd94152be65dc1
+Content-Type: application/json
 ###

@@ -3,11 +3,11 @@ const express = require('express')
 const routes = express.Router()
 
 const users = require('./users')
-const task = require('./tasks')
+const tasks = require('./tasks')
 
 
-routes.use('/user', users)
-routes.use('/tasks', task)
+routes.use('/users', users)
+routes.use('/tasks', tasks)
 
 
 routes.use('', (req, res) => {

@@ -30,13 +30,28 @@ describe('API task tests', () => {
         expect(res.body).toEqual({ message: 'Task has been created' })
     })
 
-    test('is should to return the document', async () => {
+    test('it should to return the document', async () => {
         const res = await request(app)
             .get(`/tasks/${id}`)
         expect(res.statusCode).toBe(200)
         expect(res.body.doc.description).toEqual('today i have to clean the house')
     })
 
+    test('it should to update the doc', async () => {
+        const res = await request(app)
+            .patch(`/tasks/${id}`)
+            .send({
+                description: "To write a message 2"
+            })
+        expect(res.statusCode).toBe(200)
+        // expect(req.body).toEqual({ description: 'To write a message', isCompleted: false })
+    })
+
+    test('it should delete task', async () => {
+        const res = await request(app)
+            .delete(`/tasks/${id}`)
+        expect(res.statusCode).toBe(200)
+    })
 })
 
 
