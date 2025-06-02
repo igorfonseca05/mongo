@@ -8,7 +8,7 @@ const userSchema = new mongoose.Schema({
         trim: true,
         lowercase: true,
         validate(name) {
-            if (!name || name.length <= 2) {
+            if (!name || name.length < 3) {
                 throw new Error('users name should contain at least 3 characters')
             }
         }
